@@ -23,4 +23,5 @@ int main()
     long result = VeryBigSum(n,ar);
 
     cout << result << endl;
+    return 0;
 }
