@@ -5,7 +5,8 @@
 #include <algorithm>
 using namespace std;
 
-int main(){
+int main()
+{
     vector<long> arr(5);
 
     for (int i = 0; i < arr.size(); i++)
@@ -21,7 +22,8 @@ int main(){
     
     for (int i = 0; i < arr.size(); i++)
     {
-        if(i<4){
+        if(i < 4)
+        {
             minSum += arr[i];
         }
     }
