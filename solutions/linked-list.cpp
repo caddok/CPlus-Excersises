@@ -41,21 +41,23 @@ class LinkedList
         node *temp = new node;
         temp = head;
         runtime_error empty("The list is empty");
-        if (LinkedList::count() == 0)
+        if (LinkedList::count() == 0 || temp == NULL)
         {
             throw empty;
         }
+        cout << "Elements in list:";
         while (temp != NULL)
         {
-            cout << temp->data << endl;
+            cout << temp->data << " ";
             temp = temp->next;
         }
+        cout << endl;
     }
     void peek()
     {
         node *temp = new node;
         temp = head;
-        cout << temp->data << endl;
+        cout << "First element is: " <<temp->data << endl;
     }
     void pop()
     {
@@ -65,8 +67,8 @@ class LinkedList
         {
             throw noElements;
         }
-        temp->next = head;
         temp = head;  
+        head = head->next;
         delete temp;
     }
     void insert(int value,int position)
@@ -98,7 +100,7 @@ class LinkedList
         node *previous = new node;
         current = head;
         runtime_error range("Index out of range");
-        if (position <= LinkedList::count())
+        if (position < LinkedList::count())
         {
             for (size_t i = 1; i < position; i++)
             {
@@ -107,10 +109,36 @@ class LinkedList
             }
             previous->next = current->next;
         }
+        else if (LinkedList::count() == 1)
+        {
+            head = head->next;
+            delete current;
+        }
         else
         {
             throw range;
         }
+    }
+    void elementAt(int position)
+    {
+        node *temp = new node;
+        node *current = new node;
+        current = head;
+        runtime_error range("Index out of range");
+        if (position > LinkedList::count())
+        {
+            throw range;
+        }
+        else
+        {
+            for (size_t i = 1; i < position; i++)
+            {
+                temp = current;
+                current = current->next;
+            }
+            cout << "Element at position " << position << " :" <<current->data << endl;
+        }
+
     }
 };
 
@@ -119,12 +147,16 @@ int main()
     LinkedList* list = new LinkedList();
     //list->print();
     list->push(10);  // Adds new item at the begining of the list
-    //list->count(); // returns the number of elements in the list
+    cout << "Number of elements: " << list->count() << endl; // returns the number of elements in the list
     list->peek();
     list->push(20);
+    list->print();
     list->pop();
     list->print();
-    list->erase(10);
+    list->elementAt(1);
+    list->print();
+    list->erase(1);
+    list->print();
     int value = 20, position = 4;
     list->insert(value, position); // inserts a value at a position inside the list, if the list is too short throws an exception;
     /// list.peek(); // returns the first element of the list
@@ -133,7 +165,7 @@ int main()
     // list.elementAt(22) // returns the element at index 22, throws exception if index is out of range
      
     // list.reverse(); // reverses the list
-    // list.print(); // prints the list to stdout
+    /// list.print(); // prints the list to stdout
 
     // int arr[] = {1, 5, 22, -7, 38};
     // LinkedList* list2 = new LinkedList(arr); //creates a list from array
