@@ -51,6 +51,12 @@ class LinkedList
             temp = temp->next;
         }
     }
+    void peek()
+    {
+        node *temp = new node;
+        temp = head;
+        cout << temp->data << endl;
+    }
     void insert(int value,int position)
     {
         node *temp = new node;
@@ -78,7 +84,7 @@ int main()
     //list->print();
     list->push(10);  // Adds new item at the begining of the list
     //cout << list->count() << endl; // returns the number of elements in the list
-    list->print();
+    list->peek();
     int value = 20, position = 4;
     list->insert(value, position); // inserts a value at a position inside the list, if the list is too short throws an exception;
     // list.peek(); // returns the first element of the list
