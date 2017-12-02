@@ -1,0 +1,59 @@
+#include<iostream>
+
+using namespace std;
+
+class LinkedList
+{
+    struct node
+    {
+        int data;
+        node *next;        
+    };
+    private:
+    node *head,*tail,count;
+    public:
+    LinkedList()
+    {
+        head = NULL;
+        tail = NULL;
+    }
+    void push (int value)
+    {
+        node *temp = new node;
+        temp->data = value;
+        temp->next = head;
+        head = temp;
+    }
+    void insert(int position,int value)
+    {
+        node *temp = new node;
+        node *current = new node;
+        node *previous = new node;
+        for (size_t i = 1; i < position; i++)
+        {
+            previous = current;
+            current = current->next;
+        }
+    }
+};
+
+int main()
+{
+    LinkedList* list = new LinkedList();
+    list.push(10);  // Adds new item at the begining of the list
+    int value = 20, position = 4;
+    list.insert(value, position); // inserts a value at a position inside the list, if the list is too short throws an exception;
+    list.peek(); // returns the first element of the list
+    list.pop(); // removes the first element of the list throws exception if no elements exist
+    list.erase(10) // removes the element at index 10, throws exception if index is out of range
+    list.elementAt(22) // returns the element at index 22, throws exception if index is out of range
+    list.size(); // returns the number of elements in the list
+    list.reverse(); // reverses the list
+    list.print(); // prints the list to stdout
+
+    int arr[] = {1, 5, 22, -7, 38};
+    LinkedList* list2 = new LinkedList(arr); //creates a list from array
+
+
+    return 0;
+}
