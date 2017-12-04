@@ -60,44 +60,14 @@ class BinaryTree
         }
     }
 
-    void printInOrder(Node *leaf)
-    {
-        if (leaf)
-        {
-            printInOrder(leaf->left);
-            cout << leaf->value << " ";
-            printInOrder(leaf->right);
-        }
-    }
-
     void inOrder()
     {
         printInOrder(root);
     }
 
-    void printPreOrder(Node *leaf)
-    {
-        if (leaf)
-        {
-            cout << leaf->value << " ";
-            printPreOrder(leaf->left);
-            printPreOrder(leaf->right);
-        }
-    }
-
     void preOrder()
     {
         printPreOrder(root);
-    }
-
-    void printPostOrder(Node *leaf)
-    {
-        if (leaf)
-        {
-            printPostOrder(leaf->left);
-            printPostOrder(leaf->right);
-            cout << leaf->value << " ";
-        }
     }
 
     void postOrder()
@@ -123,6 +93,33 @@ class BinaryTree
             }
         }
         return parent;
+    }
+    void printInOrder(Node *leaf)
+    {
+        if (leaf)
+        {
+            printInOrder(leaf->left);
+            cout << leaf->value << " ";
+            printInOrder(leaf->right);
+        }
+    }
+    void printPostOrder(Node *leaf)
+    {
+        if (leaf)
+        {
+            printPostOrder(leaf->left);
+            printPostOrder(leaf->right);
+            cout << leaf->value << " ";
+        }
+    }
+     void printPreOrder(Node *leaf)
+    {
+        if (leaf)
+        {
+            cout << leaf->value << " ";
+            printPreOrder(leaf->left);
+            printPreOrder(leaf->right);
+        }
     }
 };
 
