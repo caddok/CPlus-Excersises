@@ -4,7 +4,7 @@ using namespace std;
 
 class BinaryTree
 {
-    private:
+  private:
     struct Node
     {
         int value;
@@ -13,7 +13,7 @@ class BinaryTree
     };
     Node *root;
 
-    public:
+  public:
     BinaryTree()
     {
         root = NULL;
@@ -36,51 +36,36 @@ class BinaryTree
 
     void insert(int data)
     {
-        Node* leaf = new Node();
-        Node* parent = new Node;
+        Node *leaf = new Node();
         leaf->value = data;
         leaf->left = NULL;
         leaf->right = NULL;
-        parent = NULL;
+
 
         if (root == NULL)
         {
             root = leaf;
+            return;
+        }
+
+        Node* parent = findInsertionNode(leaf->value);
+
+        if (leaf->value < parent->value)
+        {
+            parent->left = leaf;
         }
         else
         {
-            Node* curr = root;
-
-            while (curr)
-            {
-                parent = curr;
-                if (leaf->value > curr->value)
-                {
-                    curr = curr->right;
-                }
-                else
-                {
-                    curr = curr->left;
-                }
-            }
-            if (leaf->value < parent->value)
-            {
-                parent->left = leaf; 
-            }
-            else
-            {
-                parent->right = leaf;
-            }
-
+            parent->right = leaf;
         }
     }
 
-    void printInOrder(Node* leaf)
+    void printInOrder(Node *leaf)
     {
         if (leaf)
         {
             printInOrder(leaf->left);
-            cout << leaf->value<<" ";
+            cout << leaf->value << " ";
             printInOrder(leaf->right);
         }
     }
@@ -90,9 +75,9 @@ class BinaryTree
         printInOrder(root);
     }
 
-    void printPreOrder(Node* leaf)
+    void printPreOrder(Node *leaf)
     {
-        if(leaf)
+        if (leaf)
         {
             cout << leaf->value << " ";
             printPreOrder(leaf->left);
@@ -105,13 +90,13 @@ class BinaryTree
         printPreOrder(root);
     }
 
-    void printPostOrder(Node* leaf)
+    void printPostOrder(Node *leaf)
     {
         if (leaf)
         {
             printPostOrder(leaf->left);
             printPostOrder(leaf->right);
-            cout << leaf->value<< " ";
+            cout << leaf->value << " ";
         }
     }
 
@@ -120,19 +105,35 @@ class BinaryTree
         printPostOrder(root);
     }
 
+    private:
+    Node* findInsertionNode(int valueOfNewElement)
+    {
+        Node *parent = NULL;
+        Node *curr = root;
+        while (curr)
+        {
+            parent = curr;
+            if (valueOfNewElement > curr->value)
+            {
+                curr = curr->right;
+            }
+            else
+            {
+                curr = curr->left;
+            }
+        }
+        return parent;
+    }
 };
-
 
 int main()
 {
-    BinaryTree* tree = new BinaryTree();
+    BinaryTree *tree = new BinaryTree();
     tree->insert(30);
     tree->insert(10);
     tree->insert(20);
     tree->insert(40);
     tree->insert(50);
-  
-
 
     cout << "In order traversal" << endl;
     tree->inOrder();
